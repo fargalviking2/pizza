@@ -1,14 +1,3 @@
-// const redButton = document.querySelector('.her');
-// const redBlocks = document.getElementsByClassName('grid-template-pizza__info2');
-// console.log(redButton); console.log('dsds');
-// redButton.addEventListener("click", function (e) {
-// 	console.log('dsds');
-// 	for (var i = 0; i < redBlocks.length; i++) {
-// 		redBlocks[i].classList.toggle('_active');
-// 		console.log('dsd');
-// 	}
-// });
-
 const App = {
 	data() {
 		return {
@@ -314,16 +303,8 @@ const App = {
 		}
 	},
 	methods: {
-		// addToBasket() {
-		// 	this.counterLosos25++;
-		// 	if (this.counterLosos25 !== 0) { console.log(this.counterLosos25); }
-		// 	else { console.log('her'); }
-		// },
-
 		onCounter(it) {
 			let resultTwo = this.products.findIndex(item => item.title === it.pizzaName);
-			console.log(resultTwo);
-			console.log(it.count);
 			if (resultTwo == -1) {
 				const newPizza = { title: 1 };
 				this.inBascetSumm += Number(it.cost);
@@ -338,7 +319,6 @@ const App = {
 				this.inBascet++;
 				let resultOne = this.products.find(item => item.title === it.pizzaName);
 				resultOne.counter++;
-				console.log(resultOne);
 			}
 		},
 		onCounterMinus(it) {
@@ -357,7 +337,6 @@ const App = {
 			this.products[idx].counter++;
 			this.inBascet++;
 			this.inBascetSumm += this.products[idx].cost;
-			console.log(this.products[idx].title);
 		},
 		counterMinus(idx) {
 			this.products[idx].counter--;
@@ -375,37 +354,38 @@ const App = {
 		beveragesCounterMinus(idx) {
 			this.beverages[idx].counter--; this.inBascet--; this.inBascetSumm -= this.beverages[idx].cost
 		},
-		sort() {
-			// var exists = this.products.some(function (product) {
-			// 	return products[idx].title === this.products[idx].title
-			// });
-			// if (!exists) { console.log('yes'); }
-		},
 		scrollTo(value) {
 			window.scrollTo({
 				top: value,
 				left: 0,
 				behavior: "smooth"
 			});
-			console.log('dd');
+			menu.classList.remove('active');
+			burger.classList.remove('active');
 		},
 		scrollTo2() {
 			document.getElementById("snacks").scrollIntoView({
 				behavior: 'smooth',
 				block: 'start'
 			});
+			menu.classList.remove('active');
+			burger.classList.remove('active');
 		},
 		scrollTo3() {
 			document.getElementById("desserts").scrollIntoView({
 				behavior: 'smooth',
 				block: 'start'
 			});
+			menu.classList.remove('active');
+			burger.classList.remove('active');
 		},
 		scrollTo4() {
 			document.getElementById("beverages").scrollIntoView({
 				behavior: 'smooth',
 				block: 'start'
 			});
+			menu.classList.remove('active');
+			burger.classList.remove('active');
 		},
 	},
 
@@ -423,7 +403,6 @@ app.component('type-block', {
 		countPlus() {
 			this.count++;
 			this.$emit('counterPlus', {
-
 			});
 			// this.$emit('counter', {
 			// 	cost: this.actualCost,
@@ -440,11 +419,9 @@ app.component('type-block', {
 	watch: {
 		count(v) {
 			if (v == 0) {
-				console.log('ye');
 				this.$emit('counterNull', {
 					// count: this.count
 				});
-
 			}
 		}
 	},
@@ -481,17 +458,11 @@ app.component('type-block2', {
 			}
 			else {
 				this.$emit('counter', {
-
 					cost: this.actualCost,
 					count: this.count,
 					pizzaName: this.pizzaName
 				})
 			};
-
-			// if (this.count !== 0) { console.log(this.actualCost); }
-			// else {
-			// 	console.log('her');
-			// }
 		},
 		removeFromBasket() {
 			this.count--;
@@ -504,7 +475,6 @@ app.component('type-block2', {
 	},
 	props: ['actualCost', 'needCost', 'pizzaName'],
 	template: `
-	
 	<template v-if="actualCost == needCost">
 	<button v-if="count < 100" @click="addToBasket"
 		class="grid-template-pizza__to-bascet-button">В
@@ -621,45 +591,44 @@ burger.addEventListener("click", function (e) {
 	menu.classList.toggle('active');
 	wrapper.classList.toggle('hidden');
 });
-console.log(menu);
 
-menu.addEventListener('touchstart', handleTouchStart, false);        
+menu.addEventListener('touchstart', handleTouchStart, false);
 menu.addEventListener('touchmove', handleTouchMove, false);
-var xDown = null;                                                        
-var yDown = null;  
+var xDown = null;
+var yDown = null;
 
-function handleTouchStart(evt) {                                         
-    xDown = evt.touches[0].clientX;                                      
-    yDown = evt.touches[0].clientY;                                      
-}; 
+function handleTouchStart(evt) {
+	xDown = evt.touches[0].clientX;
+	yDown = evt.touches[0].clientY;
+};
 
 function handleTouchMove(evt) {
-    if ( ! xDown || ! yDown ) {
-        return;
-    }
-    var xUp = evt.touches[0].clientX;                                    
-    var yUp = evt.touches[0].clientY;
-    var xDiff = xDown - xUp;
-    var yDiff = yDown - yUp;
+	if (!xDown || !yDown) {
+		return;
+	}
+	var xUp = evt.touches[0].clientX;
+	var yUp = evt.touches[0].clientY;
+	var xDiff = xDown - xUp;
+	var yDiff = yDown - yUp;
 
-    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
-        if ( xDiff > 0 ) {
-        /* left swipe */ 
-				console.log("left");
-        } else {
-        /* right swipe */
-        }                       
-    } else {
-        if ( yDiff > 0 ) {
-        /* up swipe */ 
-        } else { 
-        /* down swipe */
-        }                                                                 
-    }
-    /* reset values */
-    xDown = null;
-    yDown = null;                                             
+	if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
+		if (xDiff > 0) {
+			/* left swipe */
+			menu.classList.remove('active');
+			burger.classList.remove('active');
+		} else {
+			/* right swipe */
+			menu.classList.remove('active');
+			burger.classList.remove('active');
+		}
+	} else {
+		if (yDiff > 0) {
+			/* up swipe */
+		} else {
+			/* down swipe */
+		}
+	}
+	/* reset values */
+	xDown = null;
+	yDown = null;
 };
-menu.addEventListener("click", function (e) {
-	console.log("he");
-});
